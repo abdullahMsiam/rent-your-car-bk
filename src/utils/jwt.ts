@@ -1,0 +1,15 @@
+import jwt, { Secret } from 'jsonwebtoken';
+
+export const createToken = (
+    payload: Record<string, unknown>,
+    secret: Secret,
+    expireIn: string
+) => {
+    return jwt.sign(payload, secret, {
+        expiresIn: expireIn as any,
+    });
+};
+
+export const verifyToken = (token: string, secret: Secret) => {
+    return jwt.verify(token, secret);
+};
