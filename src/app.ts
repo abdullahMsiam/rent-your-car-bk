@@ -10,9 +10,10 @@ import { AuthRoutes } from './modules/auth/auth.routes';
 import { PropertyRoutes } from './modules/property/property.routes';
 import { CategoryRoutes } from './modules/category/category.routes';
 import { RentalRoutes } from './modules/rental/rental.routes';
-import { PaymentRoutes } from './modules/payment/payment.routes';
+// import { PaymentRoutes } from './modules/payment/payment.routes';
 import { ReviewRoutes } from './modules/review/review.routes';
 import { UserRoutes } from './modules/user/user.routes';
+import { PaymentRoutes } from './modules/payment/payment.routes';
 
 const app: Application = express();
 

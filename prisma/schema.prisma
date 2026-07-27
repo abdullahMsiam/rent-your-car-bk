@@ -11,3 +11,146 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+enum Role {
+  TENANT
+  LANDLORD
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  COMPLETED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum PaymentMethod {
+  STRIPE
+  SSLCOMMERZ
+}
+
+model User {
+  id          String     @id @default(uuid())
+  name        String
+  email       String     @unique
+  password    String
+  role        Role       @default(TENANT)
+  status      UserStatus @default(ACTIVE)
+  phoneNumber String?
+  avatar      String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  properties     Property[]      @relation("LandlordProperties")
+  rentalRequests RentalRequest[] @relation("TenantRequests")
+  payments       Payment[]
+  reviews        Review[]
+
+  @@map("users")
+}
+
+model Category {
+  id         String     @id @default(uuid())
+  name       String     @unique
+  slug       String     @unique
+  properties Property[]
+  createdAt  DateTime   @default(now())
+
+  @@map("categories")
+}
+
+model Property {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  address     String
+  city        String
+  price       Float
+  bedrooms    Int
+  bathrooms   Int
+  isAvailable Boolean  @default(true)
+  amenities   String[]
+  images      String[]
+  landlordId  String
+  categoryId  String
+
+  landlord User            @relation("LandlordProperties", fields: [landlordId], references: [id], onDelete: Cascade)
+  category Category        @relation(fields: [categoryId], references: [id])
+  requests RentalRequest[]
+  reviews  Review[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("properties")
+}
+
+model RentalRequest {
+  id          String        @id @default(uuid())
+  tenantId    String
+  propertyId  String
+  status      RequestStatus @default(PENDING)
+  moveInDate  DateTime
+  duration    Int // Duration in months
+  totalAmount Float
+  notes       String?
+
+  tenant   User      @relation("TenantRequests", fields: [tenantId], references: [id], onDelete: Cascade)
+  property Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  payments Payment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("rental_requests")
+}
+
+model Payment {
+  id              String        @id @default(uuid())
+  tenantId        String
+  rentalRequestId String
+  amount          Float
+  transactionId   String        @unique
+  provider        PaymentMethod
+  status          PaymentStatus @default(PENDING)
+  paidAt          DateTime?
+
+  tenant        User          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  rentalRequest RentalRequest @relation(fields: [rentalRequestId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@map("payments")
+}
+
+model Review {
+  id         String @id @default(uuid())
+  tenantId   String
+  propertyId String
+  rating     Int
+  comment    String
+
+  tenant   User     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@map("reviews")
+}
