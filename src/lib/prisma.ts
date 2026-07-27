@@ -1,9 +1,7 @@
 import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
-// import { PrismaClient } from '../generated/prisma';
-import config from '../config';
 import { PrismaClient } from '../../generated/prisma/client';
-// import config from '../config';
+import config from '../config';
 
 // import {} from '../../'
 
