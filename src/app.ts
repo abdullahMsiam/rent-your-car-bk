@@ -6,6 +6,8 @@ import { globalErrorHandler } from './middlewares/globalErrorHandler';
 import { notFound } from './middlewares/notFound';
 
 // Route Imports
+
+
 import { AuthRoutes } from './modules/auth/auth.routes';
 import { PropertyRoutes } from './modules/property/property.routes';
 import { CategoryRoutes } from './modules/category/category.routes';
