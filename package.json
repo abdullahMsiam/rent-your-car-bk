@@ -18,10 +18,11 @@
     "dev": "tsx watch src/server.ts",
     "build": "rimraf dist && tsc",
     "start": "node dist/server.js",
+    "postinstall": "prisma generate",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "seed": "tsx prisma/seed.ts",
-    "stripe:webhook" : "stripe listen --forward-to localhost:5000/api/subscription/webhook"
+    "stripe:webhook": "stripe listen --forward-to localhost:5000/api/subscription/webhook"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.9.0",
