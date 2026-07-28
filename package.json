@@ -36,6 +36,7 @@
     "pg": "^8.22.0",
     "sslcommerz-lts": "^1.2.0",
     "stripe": "^22.3.2",
+    "tsup": "^8.5.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
