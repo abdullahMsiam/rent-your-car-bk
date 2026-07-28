@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { JwtPayload } from 'jsonwebtoken';
-import config from '../config';
-import { verifyToken } from '../utils/jwt';
-import { prisma } from '../lib/prisma';
+import config from '../config/index.js';
+import { verifyToken } from '../utils/jwt.js';
+import { prisma } from '../lib/prisma.js';
 
 export interface AuthRequest extends Request {
     user?: JwtPayload & { id: string; role: string };

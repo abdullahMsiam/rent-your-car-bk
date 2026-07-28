@@ -4,7 +4,7 @@ import path from 'path';
 dotenv.config({ path: path.join(process.cwd(), '.env') });
 
 export default {
-    env: process.env.NODE_ENV || 'development',
+    env: process.env.NODE_ENV || 'production',
     port: process.env.PORT || 5000,
     database_url: process.env.DATABASE_URL,
     bcrypt_salt_rounds: Number(process.env.BCRYPT_SALT_ROUNDS) || 10,
@@ -18,5 +18,5 @@ export default {
         secret_key: process.env.STRIPE_SECRET_KEY,
     },
     client_url: process.env.CLIENT_URL || 'http://localhost:3000',
-    server_url: process.env.SERVER_URL || 'http://localhost:5000',
+    server_url: process.env.SERVER_URL || 'https://your-rent-bk-gamma.vercel.app/',
 };

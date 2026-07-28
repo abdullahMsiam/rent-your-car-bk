@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { catchAsync } from '../../utils/catchAsync';
-import { sendResponse } from '../../utils/sendResponse';
-import { PropertyService } from './property.service';
-import { AuthRequest } from '../../middlewares/auth';
+import { catchAsync } from '../../utils/catchAsync.js';
+import { sendResponse } from '../../utils/sendResponse.js';
+import { PropertyService } from './property.service.js';
+import { AuthRequest } from '../../middlewares/auth.js';
 
 export const PropertyController = {
     getAllProperties: catchAsync(async (req: Request, res: Response) => {

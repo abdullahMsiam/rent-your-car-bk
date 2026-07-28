@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { RentalController } from './rental.controller';
-import { auth } from '../../middlewares/auth';
+import { RentalController } from './rental.controller.js';
+import { auth } from '../../middlewares/auth.js';
 
 const router = Router();
 

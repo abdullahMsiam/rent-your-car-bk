@@ -1,8 +1,8 @@
 import { Response } from 'express';
-import { catchAsync } from '../../utils/catchAsync';
-import { sendResponse } from '../../utils/sendResponse';
-import { PaymentService } from './payment.service';
-import { AuthRequest } from '../../middlewares/auth';
+import { catchAsync } from '../../utils/catchAsync.js';
+import { sendResponse } from '../../utils/sendResponse.js';
+import { PaymentService } from './payment.service.js';
+import { AuthRequest } from '../../middlewares/auth.js';
 
 export const PaymentController = {
   createPayment: catchAsync(async (req: AuthRequest, res: Response) => {

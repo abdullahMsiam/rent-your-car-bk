@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
-import config from '../../config';
-import { prisma } from '../../lib/prisma';
-import { createToken } from '../../utils/jwt';
-import { TLoginUser, TRegisterUser } from './auth.interface';
+import config from '../../config/index.js';
+import { prisma } from '../../lib/prisma.js';
+import { createToken } from '../../utils/jwt.js';
+import { TLoginUser, TRegisterUser } from './auth.interface.js';
 
 export const AuthService = {
     async register(payload: TRegisterUser) {

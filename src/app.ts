@@ -1,21 +1,21 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import config from './config';
-import { globalErrorHandler } from './middlewares/globalErrorHandler';
-import { notFound } from './middlewares/notFound';
+import config from './config/index.js';
+import { globalErrorHandler } from './middlewares/globalErrorHandler.js';
+import { notFound } from './middlewares/notFound.js';
 
 // Route Imports
 
 
-import { AuthRoutes } from './modules/auth/auth.routes';
-import { PropertyRoutes } from './modules/property/property.routes';
-import { CategoryRoutes } from './modules/category/category.routes';
-import { RentalRoutes } from './modules/rental/rental.routes';
+import { AuthRoutes } from './modules/auth/auth.routes.js';
+import { PropertyRoutes } from './modules/property/property.routes.js';
+import { CategoryRoutes } from './modules/category/category.routes.js';
+import { RentalRoutes } from './modules/rental/rental.routes.js';
 // import { PaymentRoutes } from './modules/payment/payment.routes';
-import { ReviewRoutes } from './modules/review/review.routes';
-import { UserRoutes } from './modules/user/user.routes';
-import { PaymentRoutes } from './modules/payment/payment.routes';
+import { ReviewRoutes } from './modules/review/review.routes.js';
+import { UserRoutes } from './modules/user/user.routes.js';
+import { PaymentRoutes } from './modules/payment/payment.routes.js';
 
 const app: Application = express();
 

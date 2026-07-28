@@ -1,8 +1,8 @@
 import { Response } from 'express';
-import { catchAsync } from '../../utils/catchAsync';
-import { sendResponse } from '../../utils/sendResponse';
-import { RentalService } from './rental.service';
-import { AuthRequest } from '../../middlewares/auth';
+import { catchAsync } from '../../utils/catchAsync.js';
+import { sendResponse } from '../../utils/sendResponse.js';
+import { RentalService } from './rental.service.js';
+import { AuthRequest } from '../../middlewares/auth.js';
 
 export const RentalController = {
     submitRequest: catchAsync(async (req: AuthRequest, res: Response) => {

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { catchAsync } from '../../utils/catchAsync';
-import { sendResponse } from '../../utils/sendResponse';
-import { CategoryService } from './category.service';
+import { catchAsync } from '../../utils/catchAsync.js';
+import { sendResponse } from '../../utils/sendResponse.js';
+import { CategoryService } from './category.service.js';
 
 export const CategoryController = {
     getAll: catchAsync(async (req: Request, res: Response) => {

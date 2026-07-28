@@ -1,4 +1,4 @@
-import { prisma } from '../../lib/prisma';
+import { prisma } from '../../lib/prisma.js';
 
 export const ReviewService = {
     async createReview(tenantId: string, payload: { propertyId: string; rating: number; comment: string }) {

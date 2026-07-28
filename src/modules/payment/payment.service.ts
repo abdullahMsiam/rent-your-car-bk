@@ -1,6 +1,6 @@
-import { stripe } from '../../lib/stripe';
-import { prisma } from '../../lib/prisma';
-import config from '../../config';
+import { stripe } from '../../lib/stripe.js';
+import { prisma } from '../../lib/prisma.js';
+import config from '../../config/index.js';
 
 export const PaymentService = {
   async createStripeCheckout(rentalRequestId: string, userId: string) {

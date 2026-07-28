@@ -1,8 +1,8 @@
 import { Response } from 'express';
-import { catchAsync } from '../../utils/catchAsync';
-import { sendResponse } from '../../utils/sendResponse';
-import { ReviewService } from './review.service';
-import { AuthRequest } from '../../middlewares/auth';
+import { catchAsync } from '../../utils/catchAsync.js';
+import { sendResponse } from '../../utils/sendResponse.js';
+import { ReviewService } from './review.service.js';
+import { AuthRequest } from '../../middlewares/auth.js';
 
 export const ReviewController = {
     create: catchAsync(async (req: AuthRequest, res: Response) => {
