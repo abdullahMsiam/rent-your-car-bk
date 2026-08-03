@@ -15,10 +15,10 @@ export const PropertyService = {
 
     return await prisma.property.findMany({
       where,
+      orderBy: { createdAt: "asc" },
       include: {
         category: true,
         landlord: { select: { name: true, email: true } },
-        orderBy: { price: "asc" },
       },
     });
   },
