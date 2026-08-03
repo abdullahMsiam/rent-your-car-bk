@@ -23,7 +23,9 @@ app.use(cors({ origin: config.client_url, credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 
-
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({ success: true, message: ' API Active' });
+});
 // Base API Routes
 app.use('/api/auth', AuthRoutes);
 app.use('/api/properties', PropertyRoutes);
@@ -33,9 +35,7 @@ app.use('/api/payments', PaymentRoutes);
 app.use('/api/reviews', ReviewRoutes);
 app.use('/api/admin', UserRoutes);
 
-app.get('/', (req: Request, res: Response) => {
-  res.status(200).json({ success: true, message: ' API Active' });
-});
+
 
 app.use(notFound);
 app.use(globalErrorHandler);
