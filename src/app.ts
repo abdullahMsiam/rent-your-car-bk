@@ -20,7 +20,7 @@ import { PaymentRoutes } from './modules/payment/payment.routes.js';
 const app: Application = express();
 
 app.use(cors({
-   origin: config.client_url,
+   origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
