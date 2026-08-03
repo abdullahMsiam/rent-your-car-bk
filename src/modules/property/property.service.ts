@@ -15,7 +15,7 @@ export const PropertyService = {
 
     return await prisma.property.findMany({
       where,
-      orderBy: { createdAt: "asc" },
+      orderBy: { createdAt: "desc" },
       include: {
         category: true,
         landlord: { select: { name: true, email: true } },
