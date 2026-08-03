@@ -18,7 +18,7 @@ export const PropertyService = {
       include: {
         category: true,
         landlord: { select: { name: true, email: true } },
-        orderBy: { createdAt: "asc" },
+        orderBy: { price: "asc" },
       },
     });
   },
