@@ -26,7 +26,8 @@ app.use(express.json());
 app.get('/', (req: Request, res: Response) => {
   res.status(200).json({ success: true, message: ' API Active' });
 });
-// Base API Routes
+
+// api routes
 app.use('/api/auth', AuthRoutes);
 app.use('/api/properties', PropertyRoutes);
 app.use('/api/categories', CategoryRoutes);
