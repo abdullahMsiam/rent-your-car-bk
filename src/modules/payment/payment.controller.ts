@@ -11,7 +11,7 @@ export const PaymentController = {
   }),
 
   confirmPayment: catchAsync(async (req: AuthRequest, res: Response) => {
-    const result = await PaymentService.confirmStripePayment(req.body.sessionId);
+    const result = await PaymentService.confirmStripePayment(req);
     sendResponse(res, { statusCode: 200, success: true, message: 'Payment verified', data: result });
   }),
 };

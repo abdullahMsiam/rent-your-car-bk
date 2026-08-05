@@ -1,6 +1,14 @@
 import { stripe } from '../../lib/stripe.js';
 import { prisma } from '../../lib/prisma.js';
 import config from '../../config/index.js';
+import { Request } from 'express';
+
+export const extractCheckoutSessionId = (req: Pick<Request, 'body' | 'query'>) => {
+  const bodySessionId = req.body?.sessionId || req.body?.session_id;
+  const querySessionId = req.query?.sessionId || req.query?.session_id;
+
+  return bodySessionId || querySessionId;
+};
 
 export const PaymentService = {
   async createStripeCheckout(rentalRequestId: string, userId: string) {
@@ -45,21 +53,33 @@ export const PaymentService = {
     return { paymentUrl: session.url };
   },
 
-  async confirmStripePayment(sessionId: string) {
+  async confirmStripePayment(req: Pick<Request, 'body' | 'query'>) {
+    const sessionId = extractCheckoutSessionId(req);
+
+    if (!sessionId) {
+      throw new Error('Missing Stripe session id');
+    }
+
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
     if (session.payment_status === 'paid') {
-      const payment = await prisma.payment.update({
-        where: { transactionId: sessionId },
+      const payment = await prisma.payment.findFirst({ where: { transactionId: sessionId } });
+
+      if (!payment) {
+        throw new Error('Payment record not found');
+      }
+
+      const updatedPayment = await prisma.payment.update({
+        where: { id: payment.id },
         data: { status: 'COMPLETED', paidAt: new Date() },
       });
 
       await prisma.rentalRequest.update({
-        where: { id: payment.rentalRequestId },
+        where: { id: updatedPayment.rentalRequestId },
         data: { status: 'COMPLETED' },
       });
 
-      return payment;
+      return updatedPayment;
     }
     throw new Error('Payment transaction verification failed');
   },
