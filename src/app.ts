@@ -19,7 +19,7 @@ import { PaymentRoutes } from './modules/payment/payment.routes.js';
 
 const app: Application = express();
 
-app.use(cors({ origin: config.client_url, credentials: true }));
+app.use(cors({ origin: config.client_url || "http://localhost:3000", credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 
